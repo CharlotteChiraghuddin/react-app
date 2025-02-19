@@ -1,5 +1,37 @@
-/*background styling applied to the html, to ensure there is no gap at the top of the page*/
-html{
-  background-image: linear-gradient(#fdedfd,#4f0a9e);
-  height:100%; /*stretches color down to the bottom of the screen*/
+#bg-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100vw; /*use viewport width to make the background responsive*/
+  height: 100vh; /*use viewport height to make the background responsive*/
+  object-fit: cover;
+  z-index:-1; /*ensures that the background video does not cover anything */
+  opacity: 0.75;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(21, 1, 39, 0.75); /* Adjust the opacity here */
+  z-index: 0; /* Make sure it is above the video but below the content */
+}
+.content{
+  position:fixed;
+  z-index:1;
+}
+.App-header{
+  position:relative;
+  top:0;
+  z-index:1;
+
+  padding-top:2%;
+}
+.App-header h1{
+  margin:0;
+  opacity:100%;
+  color:white;
+  padding:0 1% 2% 1%;
+  text-align:center;
 }
