@@ -1,3 +1,8 @@
+.vt323-regular {
+  font-family: "VT323", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 #bg-video{
   position:fixed;
   top:0;
@@ -29,9 +34,28 @@
   padding-top:2%;
 }
 .App-header h1{
-  margin:0;
+  margin:0 0 0 2%;
   opacity:100%;
   color:white;
-  padding:0 1% 2% 1%;
-  text-align:center;
+  padding:0 1% 0 1%;
+  text-align:left;
+  font-family: 'VT323';
+  font-size:4rem;
+  letter-spacing:0.2rem;
+  color:#831083;
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /*Hides text initially*/
+  border-right: 0.05em solid orange; /* Adds a cursor effect */
+  animation: typing 3s steps(30, end), blink-caret 1s step-end infinite;
+  width: 9ch; 
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 9ch; }
+}
+
+/* Blinking cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: rgb(250, 166, 243); }
 }
