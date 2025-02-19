@@ -1,3 +1,5 @@
-.App{
-  background-image: linear-gradient(#fdedfd,#4f0a9e) ;
+/*background styling applied to the html, to ensure there is no gap at the top of the page*/
+html{
+  background-image: linear-gradient(#fdedfd,#4f0a9e);
+  height:100%; /*stretches color down to the bottom of the screen*/
 }
