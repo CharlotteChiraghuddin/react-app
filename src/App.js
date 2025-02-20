@@ -3,13 +3,16 @@ import './App.css';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Playlist from './Playlist';
+import TrackList from './TrackList';
 
 function App() {
+  const [showResults,setShowResults]= useState(false);
   const [request,setRequest]=useState(false);
   const [playlist,setPlaylist]= useState([]);
 
-  const handleSearch = ()=>{
-    setRequest(true);
+  const handleSearch = (value)=>{
+    setShowResults(true);
+    setRequest(value);
   }
   const handleClick =(value)=>{
     setPlaylist(prev=>[...prev, value]);
@@ -29,10 +32,11 @@ function App() {
         <header className="App-header">
           <h1>Jammming</h1>
         </header>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch}/>
       </div>
-      {request && <SearchResults request={request} callback={handleClick}/>}
+      {request && <SearchResults callback={handleClick}/>}
       {request && <Playlist playlist={playlist} callback={handleRemove}/>}
+      <TrackList request={request}/>
     </div>
   );
 }

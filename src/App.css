@@ -70,7 +70,7 @@ header{
   white-space: nowrap; /* Prevents text from wrapping */
   overflow: hidden; /*Hides text initially*/
   /*border-right: 0.05em solid #c90fc9; /* Adds a cursor effect */
-  animation: typing 3s steps(30, end);/*, blink-caret 1s step-end infinite;*/
+  animation: typing 3s steps(30, end);/* blink-caret 1s step-end infinite;*/
   width: 9ch; 
 }
 @keyframes typing {
