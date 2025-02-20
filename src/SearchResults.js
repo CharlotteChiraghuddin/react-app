@@ -1,6 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import './App.css';
-function SearchResults({request}){
+
+function SearchResults({callback}){
+
  const results={
     item:{
         song:'The groove',
@@ -23,13 +25,14 @@ function SearchResults({request}){
     }
 }
     return(
-        <div className="search-results overlay-results">
+            <div className="search-results overlay-results">
             <div className="card">
+                <h1>Results</h1>
                 {Object.values(results).map((result,index)=>(
-                    <div className="section">
-                    <p key={index}>{result.song} &nbsp;&nbsp;| &nbsp;&nbsp; {result.artist} <br></br><span className="album">{result.album}</span></p>
+                    <div className="section" data-key={index} key={index}>
+                    <p>{result.song} &nbsp;&nbsp;| &nbsp;&nbsp; {result.artist} <br></br><span className="album">{result.album}</span></p>
                     <div className="icon">
-                    <img src='./add_circle.png'></img>
+                    <img onClick={()=>callback(result)} src='./add_circle.png'></img>
                     </div>
                     </div>
                 ))}

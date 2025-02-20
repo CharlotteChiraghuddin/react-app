@@ -69,8 +69,8 @@ header{
                
   white-space: nowrap; /* Prevents text from wrapping */
   overflow: hidden; /*Hides text initially*/
-  border-right: 0.05em solid #c90fc9; /* Adds a cursor effect */
-  animation: typing 3s steps(30, end), blink-caret 1s step-end infinite;
+  /*border-right: 0.05em solid #c90fc9; /* Adds a cursor effect */
+  animation: typing 3s steps(30, end);/*, blink-caret 1s step-end infinite;*/
   width: 9ch; 
 }
 @keyframes typing {
@@ -136,6 +136,15 @@ input[type="text"]:focus {
 /*End of search bar styling*/
 
 /*Start of search results styling*/
+.card{
+  width:100%;
+}
+.card h1{
+  color:white;
+  height:25px;
+  padding:0 0 0 2%;
+}
+
 .search-results{
   grid-row-start:2;
   grid-row-end:3;
@@ -147,7 +156,6 @@ input[type="text"]:focus {
   z-index:1;
   margin:5%;
   font-family:'Delius';
-  
 }
 
 .overlay-results {
@@ -156,9 +164,7 @@ input[type="text"]:focus {
   background: rgba(0, 0, 0, 0.50); /* Adjust the opacity here */
   z-index: 0; /* Make sure it is above the video but below the content */
 }
-.card{
-  width:100%;
-}
+
 
 .section{
   border-bottom:solid 0.3px #3b0057;
@@ -195,3 +201,26 @@ input[type="text"]:focus {
   width: 35%;
 }
 /*End of search results styling*/
+/*Start of Playlist styling*/
+.playlist-name{
+  padding:5.5%;
+  width:100%;
+  box-sizing: border-box;
+  height: 25px;
+  color: rgb(0 0 0 0.75);
+
+}
+
+.playlist{
+  grid-row-start:2;
+  grid-row-end:3;
+  grid-column-start:6;
+  grid-column-end:11;
+  display:flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index:1;
+  margin:5%;
+  font-family:'Delius';
+  
+}
