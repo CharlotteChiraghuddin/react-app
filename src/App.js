@@ -1,8 +1,13 @@
-import logo from './logo.svg';
+import React,{useEffect, useState} from 'react';
 import './App.css';
 import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
 
 function App() {
+  const [request,setRequest]=useState(false);
+  const handleSearch = ()=>{
+    setRequest(true);
+  }
   return (
     <div className="App container">
       <video autoPlay muted loop id="bg-video">
@@ -14,8 +19,9 @@ function App() {
         <header className="App-header">
           <h1>Jammming</h1>
         </header>
-        <SearchBar/>
+        <SearchBar onSearch={handleSearch} />
       </div>
+      {request && <SearchResults request={request}/>}
     </div>
   );
 }

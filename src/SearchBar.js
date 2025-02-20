@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 
-function SearchBar(){
+function SearchBar({onSearch}){
     const [request,setRequest]= useState('');
     const [history,setHistory]=useState([]);
     //Creating an event listener to see if enter is pressed, and if it is i want to run handleSearch
@@ -16,10 +16,9 @@ function SearchBar(){
         setRequest(event.target.value);
     }
     function handleSearch(){
-        console.log(request);
         setHistory(prev => [...prev, request]);
-        console.log(history);
         setRequest('');
+        onSearch(request);
     }
     return(
         <div className="searchBar">      

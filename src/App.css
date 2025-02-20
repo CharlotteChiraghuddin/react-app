@@ -1,24 +1,25 @@
+
+/*Start of container positioning and display*/
 .container{
   display:grid;
   height:1000px;
   grid-template-columns: repeat(10,10%); 
-  grid-template-rows:20% 65% 15%;
+  grid-template-rows:20% 75% 5%;
 }
 .container-head{
   grid-column-start: 1;
   grid-column-end: 11;
   grid-row-start:1;
-  grid-row-end:3;
+  grid-row-end:2;
   display:grid;
   grid-template-columns: repeat(10,10%); 
   grid-template-rows:60% 20% 20%;
   height:200px;;
 }
-.vt323-regular {
-  font-family: "Vt323";
-  font-weight: 400;
-  font-style: normal;
-}
+/*End of container positioning and display*/
+
+/*Start of background styling*/
+
 #bg-video{
   position:fixed;
   top:0;
@@ -38,10 +39,10 @@
   background: rgba(21, 1, 39, 0.75); /* Adjust the opacity here */
   z-index: 0; /* Make sure it is above the video but below the content */
 }
-.content{
-  position:fixed;
-  z-index:1;
-}
+/*End of background styling*/
+
+/*Start of header styling*/
+
 header{
   width:100%;
 }
@@ -82,6 +83,9 @@ header{
   from, to { border-color: transparent; }
   50% { border-color: #e4d9e4; }
 }
+/*End of header styling*/
+
+/*Start of Search bar styling*/
 .searchBar{
   width:100%;
   z-index:1;
@@ -126,7 +130,68 @@ input[type="text"]:focus {
   padding:0;
 }
 
-
 .search-button i:hover{
   cursor:pointer;
 }
+/*End of search bar styling*/
+
+/*Start of search results styling*/
+.search-results{
+  grid-row-start:2;
+  grid-row-end:3;
+  grid-column-start:1;
+  grid-column-end:6;
+  display:flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index:1;
+  margin:5%;
+  font-family:'Delius';
+  
+}
+
+.overlay-results {
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.50); /* Adjust the opacity here */
+  z-index: 0; /* Make sure it is above the video but below the content */
+}
+.card{
+  width:100%;
+}
+
+.section{
+  border-bottom:solid 0.3px #3b0057;
+  display:grid;
+  grid-template-columns: 80% 20%;
+}
+.card p {
+  padding-bottom:2%;
+  padding-left:2%;
+  color:rgb(204, 204, 204);
+  font-size:1.2rem;
+  grid-column-start:1;
+  grid-column-end:2;
+}
+.album{
+  color:grey;
+}
+
+.icon{
+  grid-column-start:2;
+  grid-column-end:3;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+.section img:hover{
+  cursor:pointer;
+}
+.section img:active{
+  width:33%;
+}
+
+.icon img{
+  width: 35%;
+}
+/*End of search results styling*/
