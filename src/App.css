@@ -2,9 +2,9 @@
 /*Start of container positioning and display*/
 .container{
   display:grid;
-  height:1000px;
+  height:1200px;
   grid-template-columns: repeat(10,10%); 
-  grid-template-rows:20% 75% 5%;
+  grid-template-rows:15% 65% 20%;
 }
 .container-head{
   grid-column-start: 1;
@@ -138,11 +138,16 @@ input[type="text"]:focus {
 /*Start of search results styling*/
 .card{
   width:100%;
+  grid-row-start:2;
+  grid-row-end:3;
+  overflow:scroll;
 }
-.card h1{
-  color:white;
+.results-title{
+  color:rgb(204, 204, 204);
   height:25px;
   padding:0 0 0 2%;
+  grid-row-start:1;
+  grid-row-end:2;
 }
 
 .search-results{
@@ -150,12 +155,12 @@ input[type="text"]:focus {
   grid-row-end:3;
   grid-column-start:1;
   grid-column-end:6;
-  display:flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  display:grid;
+  grid-template-rows:80px 90%;
   z-index:1;
   margin:5%;
   font-family:'Delius';
+  height:100%;
 }
 
 .overlay-results {
@@ -203,12 +208,24 @@ input[type="text"]:focus {
 /*End of search results styling*/
 /*Start of Playlist styling*/
 .playlist-name{
-  padding:5.5%;
-  width:100%;
-  box-sizing: border-box;
-  height: 25px;
+  box-sizing:border-box;
   color: rgb(0 0 0 0.75);
-
+  grid-row-start:1;
+  grid-row-end:2;
+  width:100%;
+}
+.playlist-name input{
+  width:100%;
+  height:100%;
+  box-sizing: border-box;
+  background-color:rgba(0, 0, 0, 0);
+  border:none;
+}
+.playlist-name input[type="text"]{
+  font-size:1.5rem;
+  font-family:'Delius';
+  color:rgb(204, 204, 204);
+  padding-left:2%;
 }
 
 .playlist{
@@ -216,11 +233,49 @@ input[type="text"]:focus {
   grid-row-end:3;
   grid-column-start:6;
   grid-column-end:11;
-  display:flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  display:grid;
+  grid-template-rows:80px 80% 80px;
   z-index:1;
   margin:5%;
   font-family:'Delius';
+  height:100%;
   
+}
+.playlist.card{
+  grid-row-start:2;
+  grid-row-end:3;
+  
+}
+/*End of Playlist styling*/
+/*Start of send to spotify button styling*/
+.sendSpotify{
+  grid-row-start:3;
+  grid-row-end:4;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.sendSpotify button{
+  width:100%;
+  height:100%;
+  background-color:rgba(228, 21, 217, 0);
+  color:rgb(228, 217, 228);
+  font-size:1.5rem;
+  font-family:'Delius';
+  border:none;
+}
+.sendSpotify button:hover{
+  border: solid 0.1px #e4d9e4;
+  background-color:rgba(0,0,0,0.30);
+  cursor:pointer;
+}
+.sendSpotify button:active{
+  border:none;
+  color:grey;
+  cursor:pointer;
+}
+/*Hides the scroll bars without losing the functionality*/
+
+::-webkit-scrollbar {
+  display: none;
 }

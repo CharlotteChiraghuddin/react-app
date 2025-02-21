@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import './App.css';
 
-function SearchResults({callback}){
+function SearchResults({request,callback}){
 
  const results={
     item:{
@@ -26,8 +26,10 @@ function SearchResults({callback}){
 }
     return(
             <div className="search-results overlay-results">
+                <div className="results-title">
+                    <h1>Results</h1>
+                </div>
             <div className="card">
-                <h1>Results</h1>
                 {Object.values(results).map((result,index)=>(
                     <div className="section" data-key={index} key={index}>
                     <p>{result.song} &nbsp;&nbsp;| &nbsp;&nbsp; {result.artist} <br></br><span className="album">{result.album}</span></p>

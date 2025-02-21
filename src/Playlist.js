@@ -6,8 +6,11 @@ function Playlist({playlist,callback}){
 
     return(
         <div className="playlist overlay-results">
+            <div className="playlist-name">
+                <input type="text" placeholder="Playlist name..."></input>
+            </div>
             <div className="card">
-                <input className="playlist-name" type="text" placeholder="Playlist name..."></input>
+                
                 {playlist.map((choice,index)=>(
                 <div className="section" data-key={index} key={index}>
                     <p>{choice.song} &nbsp;&nbsp;| &nbsp;&nbsp; {choice.artist} <br></br><span className="album">{choice.album}</span></p>
@@ -17,6 +20,9 @@ function Playlist({playlist,callback}){
             </div>
             ))
         }
+        </div>
+        <div className="sendSpotify">
+            <button>Save to Spotify</button>
         </div>
     </div>
     );
