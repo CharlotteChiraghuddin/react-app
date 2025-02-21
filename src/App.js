@@ -7,13 +7,15 @@ import TrackList from './TrackList';
 
 function App() {
   const [showResults,setShowResults]= useState(false);
-  const [results,setResults] = useState('')
+  const [results,setResults] = useState([])
   const [request,setRequest]=useState(false);
   const [playlist,setPlaylist]= useState([]);
 
   const handleSearch = (value)=>{
     setShowResults(true);
+    if(value){
     setRequest(value);
+    }
   }
   const handleClick =(value)=>{
     setPlaylist(prev=>[...prev, value]);
@@ -25,7 +27,9 @@ function App() {
     setPlaylist([]);
   }
   const handleResults = (value)=>{
+    if(value){
     setResults(value);
+    }
   }
 
   return (

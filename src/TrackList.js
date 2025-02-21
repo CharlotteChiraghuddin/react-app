@@ -24,41 +24,45 @@ function TrackList({request, callback}){
                 }
                 const data= await response.json();
                 const access_token = data.access_token;
-                setAccessToken(access_token);
+                return access_token;
                 }
             catch(error){
                     console.error('failed to get access token', error);
                 }
 
     };
-    async function getTrackData(){
-        getAccessToken();
-
-        console.log(accessToken)
+    async function getTrackData(token){
         const searchParams = {
             method:'GET',
-            headers: {'Authorization': `Bearer ${accessToken}`}
+            headers: {'Authorization': `Bearer ${token}`}
         };
-        if(accessToken){
+        if(token){
             try{
                 const track = await fetch(`https://api.spotify.com/v1/search?q=${request}&type=track`,searchParams);
                 if(!track.ok){
                     throw new Error(`HTTP error! status: ${track.status}`);
                 }
                 const trackData = await track.json();
-                console.log(trackData);
+                callback(trackData.tracks.items);
             }catch(error){
                 console.log(error);
             }
+
         }
     }
-    useEffect(()=>{
-        callback(results);
-        getTrackData();
-    }, [request]);
-    
 
-    const results='this is the result';
+    useEffect(() => {
+        if (request) {
+          (async () => {
+            const token = await getAccessToken();
+            if (token) {
+              await getTrackData(token);
+            }
+          })();
+        }
+      }, [request]);
+   
+    
     /*Request will be used to search spotifies data base and will return the tracks matching the search which will then be sent to SearchResults and displayed to the user*/
     return null;
 }
