@@ -3,7 +3,6 @@ import './App.css';
 /*results is passed to SearchResults from App.js which retrieved the information from Tracklist through a callbackfunction*/
 function SearchResults({results,callback}){
 
-    console.log(results);
  const trialResults={
     item:{
         song:'The groove',
