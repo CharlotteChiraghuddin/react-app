@@ -1,9 +1,10 @@
 import React,{useState} from "react";
 import './App.css';
+/*results is passed to SearchResults from App.js which retrieved the information from Tracklist through a callbackfunction*/
+function SearchResults({results,callback}){
 
-function SearchResults({request,callback}){
-
- const results={
+    console.log(results);
+ const trialResults={
     item:{
         song:'The groove',
     artist:'muse',
@@ -30,7 +31,7 @@ function SearchResults({request,callback}){
                     <h1>Results</h1>
                 </div>
             <div className="card">
-                {Object.values(results).map((result,index)=>(
+                {Object.values(trialResults).map((result,index)=>(
                     <div className="section" data-key={index} key={index}>
                     <p>{result.song} &nbsp;&nbsp;| &nbsp;&nbsp; {result.artist} <br></br><span className="album">{result.album}</span></p>
                     <div className="icon">

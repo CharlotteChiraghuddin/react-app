@@ -2,7 +2,15 @@ import React,{useState,useEffect} from "react";
 
 
 
-function Playlist({playlist,callback}){
+function Playlist({playlist,callback,save}){
+    const[track,setTrack]=useState([]); /*Thsi will be used to save the uri of each track which can then be sent over to Spotify*/
+    
+    function saveToSpotify(){
+        console.log(playlist);
+        save();
+        }
+       
+    
 
     return(
         <div className="playlist overlay-results">
@@ -22,7 +30,7 @@ function Playlist({playlist,callback}){
         }
         </div>
         <div className="sendSpotify">
-            <button>Save to Spotify</button>
+            <button onClick={()=>saveToSpotify(save)}>Save to Spotify</button>
         </div>
     </div>
     );

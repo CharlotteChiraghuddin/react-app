@@ -7,6 +7,7 @@ import TrackList from './TrackList';
 
 function App() {
   const [showResults,setShowResults]= useState(false);
+  const [results,setResults] = useState('')
   const [request,setRequest]=useState(false);
   const [playlist,setPlaylist]= useState([]);
 
@@ -19,6 +20,12 @@ function App() {
   }
   const handleRemove = (choice)=>{
     setPlaylist(prevPlaylist=> prevPlaylist.filter(item=> item!== choice));
+  }
+  const handleSaveToSpotify = ()=>{
+    setPlaylist([]);
+  }
+  const handleResults = (value)=>{
+    setResults(value);
   }
 
   return (
@@ -34,9 +41,9 @@ function App() {
         </header>
         <SearchBar onSearch={handleSearch}/>
       </div>
-      {request && <SearchResults callback={handleClick}/>}
-      {request && <Playlist playlist={playlist} callback={handleRemove}/>}
-      <TrackList request={request}/>
+      {request && <SearchResults callback={handleClick} results={results}/>}
+      {request && <Playlist playlist={playlist} callback={handleRemove} save={handleSaveToSpotify}/>}
+      <TrackList request={request} callback={handleResults}/>
     </div>
   );
 }
