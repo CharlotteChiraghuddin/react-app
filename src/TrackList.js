@@ -31,11 +31,30 @@ function TrackList({request, callback}){
                 }
 
     };
+    async function getTrackData(){
+        getAccessToken();
 
+        console.log(accessToken)
+        const searchParams = {
+            method:'GET',
+            headers: {'Authorization': `Bearer ${accessToken}`}
+        };
+        if(accessToken){
+            try{
+                const track = await fetch(`https://api.spotify.com/v1/search?q=${request}&type=track`,searchParams);
+                if(!track.ok){
+                    throw new Error(`HTTP error! status: ${track.status}`);
+                }
+                const trackData = await track.json();
+                console.log(trackData);
+            }catch(error){
+                console.log(error);
+            }
+        }
+    }
     useEffect(()=>{
         callback(results);
-        getAccessToken();
-        console.log(accessToken);
+        getTrackData();
     }, [request]);
     
 
