@@ -5,6 +5,7 @@ import SearchResults from './SearchResults';
 import Playlist from './Playlist';
 import TrackList from './TrackList';
 import AuthenticateUser from './AuthenticateUser';
+import HandleRedirect from './HandleRedirect';
 
 
 function App() {
@@ -13,6 +14,14 @@ function App() {
   const [request,setRequest]=useState(false);
   const [playlist,setPlaylist]= useState([]);
 
+  const onPageLoad = () => {
+    HandleRedirect();
+    const code = localStorage.getItem("code");
+    console.log(code);
+  }
+  useEffect(()=>{
+  onPageLoad()},[])
+  
   const handleSearch = (value)=>{
     setShowResults(true);
     if(value){
