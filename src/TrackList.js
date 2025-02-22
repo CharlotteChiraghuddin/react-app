@@ -3,7 +3,7 @@ import React, {useState,useEffect} from "react";
 const client_id = '6961fe134cd64321ab2de3c427d3160d';
 const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
 
-function TrackList({request, callback}){
+function TrackList({request, callback, shareToken}){
     const [accessToken,setAccessToken]=useState('');
     /*Obtain spotify access token*/
     async function getAccessToken(){
@@ -31,6 +31,7 @@ function TrackList({request, callback}){
                 }
 
     };
+    /*use the access token to obtaint the track data using the request from the user*/
     async function getTrackData(token){
         const searchParams = {
             method:'GET',
@@ -50,12 +51,15 @@ function TrackList({request, callback}){
 
         }
     }
-
+/*useEffect hook listens for a new request and triggers the function below*/
     useEffect(() => {
         if (request) {
           (async () => {
+            /*await ensure the getAccessToken has completed before continuing*/
             const token = await getAccessToken();
+            /*checks token was recieved*/
             if (token) {
+                /*runs getTrackData*/
               await getTrackData(token);
             }
           })();

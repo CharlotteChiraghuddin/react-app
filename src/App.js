@@ -4,6 +4,8 @@ import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Playlist from './Playlist';
 import TrackList from './TrackList';
+import AuthenticateUser from './AuthenticateUser';
+
 
 function App() {
   const [showResults,setShowResults]= useState(false);
@@ -18,12 +20,14 @@ function App() {
     }
   }
   const handleClick =(value)=>{
-    setPlaylist(prev=>[...prev, value]);
+    console.log(value);
+    setPlaylist(prev=> [...prev,{name:value.name,artist:value.artists[0].name, album:value.album.name}])
   }
   const handleRemove = (choice)=>{
     setPlaylist(prevPlaylist=> prevPlaylist.filter(item=> item!== choice));
   }
   const handleSaveToSpotify = ()=>{
+    AuthenticateUser();
     setPlaylist([]);
   }
   const handleResults = (value)=>{
@@ -31,6 +35,7 @@ function App() {
     setResults(value);
     }
   }
+ 
 
   return (
     <div className="App container">

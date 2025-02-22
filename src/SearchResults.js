@@ -8,11 +8,6 @@ function SearchResults({results,callback}){
     song: 'bsjaf',
     album: 'askfgs'
   }
-  useEffect(()=>{
-    if (results){
-    console.log({results});
-    }
-  },[results]);
 
     return(
             <div className="search-results overlay-results">
