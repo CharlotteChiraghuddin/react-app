@@ -7,6 +7,7 @@ import TrackList from './TrackList';
 import AuthenticateUser from './AuthenticateUser';
 import HandleRedirect from './HandleRedirect';
 import RequestAccessToken from './RequestAccessToken';
+import GetUserId from './GetUserId';
 
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
   const [playlist,setPlaylist]= useState([]);
   const [state,setState]= useState('');
   const [load,setLoad] = useState(0);
+  const [token, setToken] = useState('');
   const hasRunRef = useRef(false); // useRef to track if the function has run
+ 
 
   //This function runs everytime the page renders
   async function onPageLoad(){
@@ -60,12 +63,19 @@ function App() {
       RequestAccessToken(code);
       //retrieving the refresh_token from local storage to be use to get a new access token
       const refresh_token = localStorage.getItem("refresh_token");
-            console.log(`This is the refresh token in App.js ${refresh_token}`);
       //checking refresh token was recieved
       console.log(`This is the refresh token in App.js ${refresh_token}`);
+
+      const access_token = localStorage.getItem("access_token");
+      console.log(`This is the access token in App.js ${access_token}`);
+      setToken(access_token);
     }
 
 }
+
+useEffect(()=>{
+  GetUserId();
+},[token])
 
   useEffect(()=>{
     //If hasRunRef is true, it will exit the hook, this ensures that onPageLoad only runs once.
