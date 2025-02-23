@@ -12,7 +12,6 @@ const authorize = "https://accounts.spotify.com/authorize";
     const state = Math.random().toString(36).substring(7);
     
     localStorage.setItem("state",state);
-        
 
         let url = authorize;
         url += "?client_id=" + client_id;
@@ -21,11 +20,10 @@ const authorize = "https://accounts.spotify.com/authorize";
         url += "&state=" + state; 
         url += "&show_dialog=true";
         url += "&scope=user-read-private user-read-email";
-        
-
-        
-
-
+        if (window === undefined){
+            console.log('Failed to execute');
+        } else{
         window.location.href = url; // Show Spotify's authorization screen
+        }
 }
     export default AuthenticateUser;
