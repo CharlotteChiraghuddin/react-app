@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
 
 
-function Playlist({playlist,callback,save}){
+function Playlist({playlist,callback,save,handleChange, playlistName}){
     const[track,setTrack]=useState([]); /*Thsi will be used to save the uri of each track which can then be sent over to Spotify*/
 
     const[userID,setUserID]=useState('');
-    
+
     async function GetUserID(){
         const param = {
             method:'GET',
@@ -32,7 +32,7 @@ function Playlist({playlist,callback,save}){
     return(
         <div className="playlist overlay-results">
             <div className="playlist-name">
-                <input type="text" placeholder="Playlist name..."></input>
+                <input type="text" id="name" placeholder="Playlist name..." value={playlistName} onChange={handleChange}></input>
             </div>
             <div className="card">
                 

@@ -19,7 +19,7 @@ const authorize = "https://accounts.spotify.com/authorize";
         url += "&redirect_uri=" + encodeURI(redirect_uri);
         url += "&state=" + state; 
         url += "&show_dialog=true";
-        url += "&scope=user-read-private user-read-email";
+        url += "&scope=user-read-private user-read-email playlist-modify-public playlist-modify-private";
         if (window === undefined){
             console.log('Failed to execute');
         } else{

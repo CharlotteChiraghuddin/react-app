@@ -8,6 +8,7 @@ import AuthenticateUser from './AuthenticateUser';
 import HandleRedirect from './HandleRedirect';
 import RequestAccessToken from './RequestAccessToken';
 import GetUserId from './GetUserId';
+import AddPlaylist from './AddPlaylist';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   const [state,setState]= useState('');
   const [load,setLoad] = useState(0);
   const [token, setToken] = useState('');
+  const [playlistName, setPlaylistName] = useState('');
   const hasRunRef = useRef(false); // useRef to track if the function has run
  
 
@@ -84,6 +86,12 @@ useEffect(()=>{
     hasRunRef.current = true;
 },[])
 
+//Updates the playlist name everytime it changes.
+const handleChange = (event)=>{
+  setPlaylistName(event.target.value);
+  console.log(playlistName);
+}
+
 //Runs when search button is clicked, this sets showResults to true so the serach results can be displayed.
 //It also sets the request to the value put into the search bar.
   const handleSearch = (value)=>{
@@ -116,8 +124,14 @@ useEffect(()=>{
   //This will run when the Save to Spotify button is clicked. It will trigger the authentication.
   //It will also set Playlist to [], so the user can start to create a new playlist.
   const handleSaveToSpotify = ()=>{
+    //runs AddPlaylist when Save to Spotify button is pressed and the name currently in the input field is passed over as a prop
+    AddPlaylist({playlistName});
+    
+    //checks if user has already been authenticated to prevent unneccessary authentication.
+    if(window.location.search.length === 0){
     AuthenticateUser();
-    localStorage("authorized",true);
+    }
+    localStorage.setItem("authorized",true);
     setPlaylist([]);
   }
 
@@ -137,7 +151,7 @@ useEffect(()=>{
         <SearchBar onSearch={handleSearch}/>
       </div>
       {request && <SearchResults callback={handleClick} results={results}/>}
-      {request && <Playlist playlist={playlist} callback={handleRemove} save={handleSaveToSpotify}/>}
+      {request && <Playlist playlist={playlist} callback={handleRemove} save={handleSaveToSpotify} handleChange={handleChange}/>}
       <TrackList request={request} callback={handleResults}/>
     </div>
   );
