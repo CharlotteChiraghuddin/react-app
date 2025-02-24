@@ -47,7 +47,7 @@ function App() {
     //Checking what the state is equal to in the returned url
     const urlParams = new URLSearchParams(window.location.search);
     const receivedState = urlParams.get("state");
-
+    console.log(receivedState);
     //checking the authentication process has been complete before doing the check
     if(window.location.search.length > 0){
       if (storedState !== receivedState) {
@@ -113,7 +113,7 @@ const handleChange = (event)=>{
   //This handles when the plus icon is clicked next to a track. It will save the data to the playlist array.
   const handleClick =(value)=>{
     console.log(value);
-    setPlaylist(prev=> [...prev,{name:value.name,artist:value.artists[0].name, album:value.album.name}])
+    setPlaylist(prev=> [...prev,{name:value.name,artist:value.artists[0].name, album:value.album.name, uri:value.uri}])
   }
 
   //This handles when the minus icon is clicked and will remove the corresponding data from the playlist array.
@@ -126,7 +126,10 @@ const handleChange = (event)=>{
   const handleSaveToSpotify = ()=>{
     //runs AddPlaylist when Save to Spotify button is pressed and the name currently in the input field is passed over as a prop
     AddPlaylist({playlistName});
-    
+
+    //once save to spotify is clicked, the current state of playlist is saved to local storage to be retrieved in AddPlaylist
+    localStorage.setItem("playlist",JSON.stringify(playlist));
+
     //checks if user has already been authenticated to prevent unneccessary authentication.
     if(window.location.search.length === 0){
     AuthenticateUser();
