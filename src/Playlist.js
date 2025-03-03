@@ -6,22 +6,6 @@ function Playlist({playlist,callback,save,handleChange, playlistName}){
 
     const[userID,setUserID]=useState('');
 
-    async function GetUserID(){
-        const param = {
-            method:'GET',
-            header:{'Authorization':`Bearer`}
-        }
-        try{
-            const response = await fetch('https://api.spotify.com/v1/me',param)
-            if(!response.ok){
-                throw new Error('HTTP error! status:',response.status)
-            }
-            const value = await response.json();
-            setUserID(value);
-        }catch(error){
-            console.log(error);
-        }
-    }
 
     function saveToSpotify(){
         save();

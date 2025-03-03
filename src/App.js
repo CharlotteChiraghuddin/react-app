@@ -113,7 +113,7 @@ const handleChange = (event)=>{
   //This handles when the plus icon is clicked next to a track. It will save the data to the playlist array.
   const handleClick =(value)=>{
     console.log(value);
-    setPlaylist(prev=> [...prev,{name:value.name,artist:value.artists[0].name, album:value.album.name, uri:value.uri}])
+    setPlaylist(prev=> [{name:value.name,artist:value.artists[0].name, album:value.album.name, uri:value.uri},...prev])
   }
 
   //This handles when the minus icon is clicked and will remove the corresponding data from the playlist array.
