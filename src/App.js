@@ -75,9 +75,9 @@ function App() {
 
 }
 
-useEffect(()=>{
+/*useEffect(()=>{
   GetUserId();
-},[token])
+},[token])*/
 
   useEffect(()=>{
     //If hasRunRef is true, it will exit the hook, this ensures that onPageLoad only runs once.
@@ -112,7 +112,6 @@ const handleChange = (event)=>{
   
   //This handles when the plus icon is clicked next to a track. It will save the data to the playlist array.
   const handleClick =(value)=>{
-    console.log(value);
     setPlaylist(prev=> [{name:value.name,artist:value.artists[0].name, album:value.album.name, uri:value.uri},...prev])
   }
 
@@ -156,6 +155,7 @@ const handleChange = (event)=>{
       {request && <SearchResults callback={handleClick} results={results}/>}
       {request && <Playlist playlist={playlist} callback={handleRemove} save={handleSaveToSpotify} handleChange={handleChange}/>}
       <TrackList request={request} callback={handleResults}/>
+      {token && <GetUserId/>}
     </div>
   );
 }

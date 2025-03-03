@@ -1,6 +1,3 @@
-import React from "react";
-import AuthenticateUser from "./AuthenticateUser";
-
 const client_id = '6961fe134cd64321ab2de3c427d3160d';
 const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
 const redirect_uri = 'http://localhost:3000/callback';
@@ -31,7 +28,8 @@ async function RequestAccessToken(code){
             body: body.toString()
           }
 
-    //checks if we have already gotten a refresh token, if we do, this does not need to run again.
+    //checks if we have already gotten a token, if we do, this does not need to run again.
+    if(!localStorage.getItem("access_token")){
         try{
             const response = await fetch(token,authOptions);
 
@@ -46,6 +44,7 @@ async function RequestAccessToken(code){
         }catch(error){
             console.error(error);
         }
+      }
 }   
 
 export default RequestAccessToken;
