@@ -73,7 +73,30 @@ async function AddPlaylist({playlistName}){
     };
 
     try{
+        /*make the request to add the chosen tracks to the playlist*/
     const added = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`,trackParams);
+    if(added.error && added.error.message === "access token has expired"){
+        const refresh_token = localStorage.getItem("refresh_token");
+        const refreshParamsBody = new URLSearchParams({
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token,
+        });
+        const refreshParams = {
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+            body: refreshParamsBody
+        }
+        try{
+        const data = await fetch('https://accounts.spotify.com/api/token', refreshParams);
+            if(!data.ok){
+                throw new Error('HTTP Error: ' + data.status);
+            }
+            const response = await data.json();
+            const newToken = response.access_token;
+            localStorage.setItem("access_token", newToken);
+        }catch(error){
+            console.error(error);
+        }
+    }
         
     if(!added.ok){
         throw new Error(`HTTP Error: ${response.status}-${response.statusText}`);
