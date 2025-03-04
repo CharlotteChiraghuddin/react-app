@@ -25,5 +25,7 @@ const authorize = "https://accounts.spotify.com/authorize";
         } else{
         window.location.href = url; // Show Spotify's authorization screen
         }
+        localStorage.setItem("pendingAction", "pending");
+        
 }
     export default AuthenticateUser;

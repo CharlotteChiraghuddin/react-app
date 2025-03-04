@@ -29,7 +29,11 @@ function App() {
     const currentCode = searchParams.get("code");
 
     if(!currentCode){
-      localStorage.clear();
+      localStorage.removeItem("code");
+      localStorage.removeItem("state");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
     }
     //Retrieves the authorization code that is returned from authenticating the user
     HandleRedirect();
@@ -71,6 +75,20 @@ function App() {
       const access_token = localStorage.getItem("access_token");
       console.log(`This is the access token in App.js ${access_token}`);
       setToken(access_token);
+
+    }
+
+    /*check if there is a pending action*/
+    const pendingAction = localStorage.getItem("pendingAction");
+    console.log('This is the pending action: ' + pendingAction);
+    if(pendingAction === "pending"){
+      const userID = localStorage.getItem("userId");
+      if(userID){
+        console.log(JSON.stringify(localStorage.getItem("playlist")));
+        console.log(localStorage.getItem("playlistName"));
+        await AddPlaylist();
+        localStorage.removeItem("pendingAction");
+      }
     }
 
 }
@@ -88,8 +106,7 @@ function App() {
 
 //Updates the playlist name everytime it changes.
 const handleChange = (event)=>{
-  setPlaylistName(event.target.value);
-  console.log(playlistName);
+  localStorage.setItem("playlistName",event.target.value);
 }
 
 //Runs when search button is clicked, this sets showResults to true so the serach results can be displayed.
