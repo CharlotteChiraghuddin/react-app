@@ -11,7 +11,8 @@ const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
 function GetUserId(){
 const token = localStorage.getItem("access_token");
 console.log('This is the token in Get User Id:' + token);
-console.log(localStorage.getItem("userId"));
+const userID = localStorage.getItem("userId")
+console.log(userID);
     useEffect(()=>{
         const userID = localStorage.getItem("userId");
         const  fetchUserId = async()=>{
@@ -21,10 +22,12 @@ console.log(localStorage.getItem("userId"));
                     headers: { Authorization: `Bearer ${token}` }
                 }
                 const data = await fetch('https://api.spotify.com/v1/me', authParams);
+
+                const response = await data.json();
+                console.log(response);
                 /*checking if the access token has expired, if it has, we will use the refresh token to request a new token*/
-                const check = await data.json();
                 
-                if(check.error && check.error.message === "Invalid access token" || check.error.message === "The access token expired"){
+                if(response.error && response.error.message === "The access token expired"){
                     const refresh_token = localStorage.getItem("refresh_token");
                     
                     const refreshParams = {
@@ -36,8 +39,8 @@ console.log(localStorage.getItem("userId"));
                             grant_type: 'refresh_token',
                             refresh_token: refresh_token,
                             client_id: client_id
-                    })
-                }
+                        })
+                    }
                     try{
                     const data = await fetch('https://accounts.spotify.com/api/token', refreshParams);
                         if(!data.ok){
@@ -45,9 +48,11 @@ console.log(localStorage.getItem("userId"));
                         }
                         const response = await data.json();
                         const newToken = response.access_token;
+                        const newRefreshToken = response.refresh_token;
 
                         console.log('This is the new token'+ newToken);
                         localStorage.setItem("access_token", newToken);
+                        localStorage.setItem("refresh_token", newRefreshToken);
 
                         /*try again to fetch the user id with the new access token*/
                         const authParams = {
@@ -78,13 +83,13 @@ console.log(localStorage.getItem("userId"));
                 if(!data.ok){
                     throw new Error('HTTP Error: ' + data.status + data.statusText);
                 }
-                const response = await data.json();
+                
                 console.log(`This is the response: ${response}`);
                 const id = response.id;
                 console.log(`This is the user id: ${id}`);
                 localStorage.setItem("userId", id);
             }catch(error){
-                console.error(error.description);
+                console.error('Failed to fetch user id: ' + error);
             }
         }
         if(!userID){

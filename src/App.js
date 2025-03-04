@@ -59,10 +59,10 @@ function App() {
       }
     }
 
-    //if a code has been recieved, we will use that code to get a refresh token.
+    //if a code has been recieved, we will use that code to get an access token.
     if(code){
       //call RequestAccessToken, and pass in authorization code and refresh_token which will be used to check if it needs to run or not.
-      RequestAccessToken(code);
+      await RequestAccessToken(code);
       //retrieving the refresh_token from local storage to be use to get a new access token
       const refresh_token = localStorage.getItem("refresh_token");
       //checking refresh token was recieved
