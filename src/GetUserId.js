@@ -8,14 +8,30 @@ const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
  //Encode the combined string in Base64
  const encoded = btoa(combined);
 
-function GetUserId(){
+        function GetUserId(){
   
-    const token = localStorage.getItem("access_token");
-    console.log('This is the token in Get User Id:' + token);
-    const userID = localStorage.getItem("userId")
-    console.log(userID);
-        useEffect(()=>{
+            const token = localStorage.getItem("access_token");
+            console.log('This is the token in Get User Id:' + token);
+
             const userID = localStorage.getItem("userId");
+            console.log(userID);
+
+            async function pendingAction() {
+                const pendingAction = localStorage.getItem("pendingAction");
+                console.log('This is the pending action: ' + pendingAction);
+                if (pendingAction === "pending") {
+                  const id = localStorage.getItem("userId");
+                  if (id) {
+                    console.log(JSON.stringify(localStorage.getItem("playlist")));
+                    console.log(localStorage.getItem("playlistName"));
+                    localStorage.removeItem("pendingAction");
+                    await AddPlaylist();
+                  }
+                }else{
+                    localStorage.removeItem("playlist");
+                    localStorage.removeItem("playlistName")
+                }
+              }
             const  fetchUserId = async()=>{
                 try{
                     const authParams = {
@@ -70,7 +86,6 @@ function GetUserId(){
                                 const userId = response.id;
 
                                 localStorage.setItem("userId", userId);
-                                
                             }catch(error){
                                 console.error('Failed to retrieve the user data with the new access token: ' + error);
                         }
@@ -89,6 +104,8 @@ function GetUserId(){
                     const id = response.id;
                     console.log(`This is the user id: ${id}`);
                     localStorage.setItem("userId", id);
+                    pendingAction();
+                    return id;
                 }catch(error){
                     console.error('Failed to fetch user id: ' + error);
                 }
@@ -96,8 +113,6 @@ function GetUserId(){
             if(!userID){
                 fetchUserId();
             }
-    },[])
-        
    
 }
 export default GetUserId;

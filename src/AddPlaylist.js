@@ -82,8 +82,7 @@ async function AddPlaylist(){
     }
 
     const response = await added.json();
-    localStorage.removeItem("playlist");
-    localStorage.removeItem("playlistName")
+
     } catch(error){
         console.error('Error adding the tracks to the playlist' + error)
     }

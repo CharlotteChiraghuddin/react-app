@@ -20,6 +20,8 @@ function App() {
   const [load,setLoad] = useState(0);
   const [token, setToken] = useState('');
   const [playlistName, setPlaylistName] = useState('');
+  const [userID, setUserID] = useState('');
+  const [counter, setCounter] = useState(0);
   const hasRunRef = useRef(false); // useRef to track if the function has run
  
 
@@ -78,24 +80,8 @@ function App() {
 
     }
 
-    /*check if there is a pending action*/
-    const pendingAction = localStorage.getItem("pendingAction");
-    console.log('This is the pending action: ' + pendingAction);
-    if(pendingAction === "pending"){
-      const userID = localStorage.getItem("userId");
-      if(userID){
-        console.log(JSON.stringify(localStorage.getItem("playlist")));
-        console.log(localStorage.getItem("playlistName"));
-        await AddPlaylist();
-        localStorage.removeItem("pendingAction");
-      }
-    }
-
 }
 
-/*useEffect(()=>{
-  GetUserId();
-},[token])*/
 
   useEffect(()=>{
     //If hasRunRef is true, it will exit the hook, this ensures that onPageLoad only runs once.
