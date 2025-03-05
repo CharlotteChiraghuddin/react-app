@@ -92,7 +92,9 @@ function App() {
 
 //Updates the playlist name everytime it changes.
 const handleChange = (event)=>{
-  localStorage.setItem("playlistName",event.target.value);
+  const newName = event.target.value;
+  localStorage.setItem("playlistName",newName);
+  setPlaylistName(newName);
 }
 
 //Runs when search button is clicked, this sets showResults to true so the serach results can be displayed.
@@ -127,17 +129,17 @@ const handleChange = (event)=>{
   //It will also set Playlist to [], so the user can start to create a new playlist.
   const handleSaveToSpotify = ()=>{
     //runs AddPlaylist when Save to Spotify button is pressed and the name currently in the input field is passed over as a prop
-    AddPlaylist({playlistName});
-
+    AddPlaylist();
     //once save to spotify is clicked, the current state of playlist is saved to local storage to be retrieved in AddPlaylist
     localStorage.setItem("playlist",JSON.stringify(playlist));
-
+    setPlaylistName('');
     //checks if user has already been authenticated to prevent unneccessary authentication.
     if(window.location.search.length === 0){
     AuthenticateUser();
     }
     localStorage.setItem("authorized",true);
     setPlaylist([]);
+    setPlaylistName('');
   }
 
 
@@ -156,7 +158,7 @@ const handleChange = (event)=>{
         <SearchBar onSearch={handleSearch}/>
       </div>
       {request && <SearchResults callback={handleClick} results={results}/>}
-      {request && <Playlist playlist={playlist} callback={handleRemove} save={handleSaveToSpotify} handleChange={handleChange}/>}
+      {request && <Playlist playlist={playlist} callback={handleRemove} save={handleSaveToSpotify} handleChange={handleChange} playlistName={playlistName}/>}
       <TrackList request={request} callback={handleResults}/>
       {token && <GetUserId/>}
     </div>
