@@ -25,11 +25,11 @@ const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
                     console.log(JSON.stringify(localStorage.getItem("playlist")));
                     console.log(localStorage.getItem("playlistName"));
                     localStorage.removeItem("pendingAction");
-                    await AddPlaylist();
+                    await AddPlaylist().then(()=>{
+                        localStorage.removeItem("playlist");
+                        localStorage.removeItem("playlistName")
+                    })
                   }
-                }else{
-                    localStorage.removeItem("playlist");
-                    localStorage.removeItem("playlistName")
                 }
               }
             const  fetchUserId = async()=>{
@@ -43,7 +43,6 @@ const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
                     const response = await data.json();
                     console.log(response);
                     /*checking if the access token has expired, if it has, we will use the refresh token to request a new token*/
-                    
                     if(response.error && response.error.message === "The access token expired"){
                         const refresh_token = localStorage.getItem("refresh_token");
                         
