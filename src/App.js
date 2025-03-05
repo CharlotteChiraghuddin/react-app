@@ -24,9 +24,12 @@ function App() {
   const [counter, setCounter] = useState(0);
   const hasRunRef = useRef(false); // useRef to track if the function has run
  
+      
+
 
   //This function runs everytime the page renders
   async function onPageLoad(){
+    window.scrollTo(0,0,);
     const searchParams = new URLSearchParams(window.location.search);
     const currentCode = searchParams.get("code");
 
@@ -88,6 +91,11 @@ function App() {
     if(hasRunRef.current) return;
     onPageLoad()
     hasRunRef.current = true;
+    
+    //ensure scroll restoration is disabled
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
 },[])
 
 //Updates the playlist name everytime it changes.
