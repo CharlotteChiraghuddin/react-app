@@ -50,7 +50,7 @@ async function AddPlaylist(){
                  grant_type: 'refresh_token',
                  refresh_token: refresh_token,
                  client_id: client_id
-             })
+             }).toString(),//ensure the body is a string
          }
          try{
          const data = await fetch('https://accounts.spotify.com/api/token', refreshParams);

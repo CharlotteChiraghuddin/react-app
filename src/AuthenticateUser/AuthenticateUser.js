@@ -1,15 +1,12 @@
-import { useEffect } from "react";
-
-const client_id = '6961fe134cd64321ab2de3c427d3160d';
-const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
-const redirect_uri = 'http://localhost:3000/callback';
 const authorize = "https://accounts.spotify.com/authorize";
 
 
     /*Get user authorization*/
-    function AuthenticateUser(){
-    // Generate a random state parameter
-    const state = Math.random().toString(36).substring(7);
+    function AuthenticateUser(
+        client_id = '6961fe134cd64321ab2de3c427d3160d',
+        redirect_uri = 'http://localhost:3000/callback',
+        state = Math.random().toString(36).substring(7)
+    ){
     
     localStorage.setItem("state",state);
 

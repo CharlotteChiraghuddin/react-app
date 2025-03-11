@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import './App.css';
+import '../Stylesheets/App.css';
 /*results is passed to SearchResults from App.js which retrieved the information from Tracklist through a callbackfunction*/
 function SearchResults({results,callback}){
 
@@ -19,7 +19,7 @@ function SearchResults({results,callback}){
                     <div className="section" data-key={index} key={index}>
                     <p>{result.name} &nbsp;&nbsp;| &nbsp;&nbsp; {result.artists[0].name} <br></br><span className="album">{result.album.name}</span></p>
                     <div className="icon">
-                    <img onClick={()=>callback(result)} src='./add_circle.png'></img>
+                    <img onClick={()=>callback(result)} src='./add_circle.png' alt='add_circle' ></img>
                     </div>
                     </div>
                 ))}

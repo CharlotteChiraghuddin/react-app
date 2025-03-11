@@ -1,14 +1,14 @@
 import React,{useEffect, useState, useRef} from 'react';
-import './App.css';
-import SearchBar from './SearchBar';
-import SearchResults from './SearchResults';
-import Playlist from './Playlist';
-import TrackList from './TrackList';
-import AuthenticateUser from './AuthenticateUser';
-import HandleRedirect from './HandleRedirect';
-import RequestAccessToken from './RequestAccessToken';
-import GetUserId from './GetUserId';
-import AddPlaylist from './AddPlaylist';
+import '../Stylesheets/App.css';
+import SearchBar from '../SearchBar/SearchBar';
+import SearchResults from '../SearchResults/SearchResults';
+import Playlist from '../Playlist/Playlist';
+import TrackList from '../Tracklist/TrackList';
+import AuthenticateUser from '../AuthenticateUser/AuthenticateUser';
+import HandleRedirect from '../HandleRedirect/HandleRedirect';
+import RequestAccessToken from '../RequestAccessToken/RequestAccessToken';
+import GetUserId from '../GetUserId/GetUserId';
+import AddPlaylist from '../AddPlaylist/AddPlaylist';
 
 
 function App() {
@@ -91,7 +91,7 @@ function App() {
     if(hasRunRef.current) return;
     onPageLoad()
     hasRunRef.current = true;
-    
+
     //ensure scroll restoration is disabled
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';

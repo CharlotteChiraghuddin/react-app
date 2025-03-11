@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import './App.css';
+import '../Stylesheets/App.css';
 
-function SearchBar({onSearch,callback}){
+function SearchBar({onSearch}){
     const [request,setRequest]= useState('');
     const [history,setHistory]=useState([]);
     //Creating an event listener to see if enter is pressed, and if it is i want to run handleSearch

@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import AddPlaylist from "./AddPlaylist";
+import AddPlaylist from "../AddPlaylist/AddPlaylist";
 const client_id = '6961fe134cd64321ab2de3c427d3160d';
 const client_secret = 'abeabc05a98245e684ff5bb8f9e81ebe';
 
